@@ -68,13 +68,29 @@ jobs:
           set -euo pipefail
           ssh -i key.pem -o StrictHostKeyChecking=no -o ConnectTimeout=20 ubuntu@${{ steps.resolve_host.outputs.host }} "echo REMOTE_OK"
 
+      - name: Bootstrap remote folder
+        run: |
+          set -euo pipefail
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} \
+            "mkdir -p /home/ubuntu/projet_industriel_agi/repo"
+
       - name: Sync files
         run: |
           set -euo pipefail
-          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} "mkdir -p /home/ubuntu/projet_industriel_agi"
-          scp -i key.pem -o StrictHostKeyChecking=no -r \
-            . \
+          scp -i key.pem -o StrictHostKeyChecking=no -r . \
             ubuntu@${{ steps.resolve_host.outputs.host }}:/home/ubuntu/projet_industriel_agi/repo
+
+      - name: Ensure Docker exists
+        run: |
+          set -euo pipefail
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} '
+            if ! command -v docker >/dev/null 2>&1; then
+              sudo apt-get update
+              sudo apt-get install -y docker.io docker-compose-plugin
+              sudo systemctl enable docker
+              sudo systemctl start docker
+            fi
+          '
 
       - name: Deploy stack
         run: |
