@@ -95,5 +95,17 @@ jobs:
       - name: Deploy stack
         run: |
           set -euo pipefail
-          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} \
-            "cd /home/ubuntu/projet_industriel_agi/repo && docker compose -f docker-compose.harness.yml up -d --build"
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} '
+            set -euo pipefail
+            cd /home/ubuntu/projet_industriel_agi/repo
+
+            docker build -t harness-backend:latest .
+
+            docker rm -f harness-backend || true
+            docker run -d --name harness-backend \
+              --restart unless-stopped \
+              -p 8030:8030 \
+              -e MCP_ENABLED=false \
+              -e SUPERVISOR_USE_LLM=true \
+              harness-backend:latest
+          '
