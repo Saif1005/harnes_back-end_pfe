@@ -38,4 +38,9 @@ jobs:
       - name: Resolve host and deploy
         run: |
           HOST=$(aws ec2 describe-instances --instance-ids "${{ secrets.EC2_INSTANCE_ID }}" --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)
+
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@$HOST "mkdir -p /home/ubuntu/projet_industriel_agi"
+
+          scp -i key.pem -o StrictHostKeyChecking=no -r docker-compose.harness.yml harness_backend ubuntu@$HOST:/home/ubuntu/projet_industriel_agi/
+
           ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@$HOST "cd /home/ubuntu/projet_industriel_agi && docker compose -f docker-compose.harness.yml up -d --build"
