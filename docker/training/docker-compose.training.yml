@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  harness-train-classification:
+    build:
+      context: ../../..
+      dockerfile: harness_backend/docker/training/Dockerfile.classification-train
+    container_name: harness-train-classification
+    restart: "no"
+    volumes:
+      - ../../../harness_backend:/app/harness_backend
+      - ../../../scripts:/app/scripts
+      - ../../../agent_pdr_microservice/data:/app/agent_pdr_microservice/data
+      - ../../../.tmp_harness_models:/tmp/harness/models
+
+  harness-train-prediction:
+    build:
+      context: ../../..
+      dockerfile: harness_backend/docker/training/Dockerfile.prediction-train
+    container_name: harness-train-prediction
+    restart: "no"
+    volumes:
+      - ../../../harness_backend:/app/harness_backend
+      - ../../../scripts:/app/scripts
+      - ../../../agent_pdr_microservice/data:/app/agent_pdr_microservice/data
+      - ../../../.tmp_harness_models:/tmp/harness/models
+

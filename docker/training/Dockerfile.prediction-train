@@ -1,0 +1,16 @@
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+COPY harness_backend/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r /app/requirements.txt
+
+COPY harness_backend /app/harness_backend
+COPY scripts /app/scripts
+COPY agent_pdr_microservice/data /app/agent_pdr_microservice/data
+
+CMD ["python", "scripts/train_harness_prediction.py"]
+
