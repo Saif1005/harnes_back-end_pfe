@@ -1,0 +1,182 @@
+{
+  "created_at": "2026-05-08T17:53:30Z",
+  "env": "prod",
+  "base_url": "http://127.0.0.1:8030",
+  "baseline": {
+    "health": {
+      "ok": true,
+      "code": 200,
+      "latency_ms": 3.37
+    },
+    "protocols": {
+      "ok": true,
+      "code": 200,
+      "latency_ms": 2.36
+    },
+    "monitoring_runtime": {
+      "ok": true,
+      "code": 200,
+      "latency_ms": 1.5
+    },
+    "monitoring_metrics": {
+      "ok": true,
+      "code": 200,
+      "latency_ms": 15.09
+    }
+  },
+  "official_import": {
+    "ok": true,
+    "code": 200,
+    "latency_ms": 330.45,
+    "history_rows": 20000,
+    "current_items": 12754
+  },
+  "tools": [
+    {
+      "name": "classification_chimie",
+      "ok": true,
+      "code": 200,
+      "latency_ms": 3.04,
+      "label": "CHIMIE",
+      "model": "xlm-roberta-large"
+    },
+    {
+      "name": "classification_pdr",
+      "ok": true,
+      "code": 200,
+      "latency_ms": 1.6,
+      "label": "PDR",
+      "model": "xlm-roberta-large"
+    },
+    {
+      "name": "recipe_formula",
+      "ok": true,
+      "code": 200,
+      "latency_ms": 8581.55,
+      "source": "formula_exact_csv",
+      "engine": "formuleexacte+qwen",
+      "items": 16
+    },
+    {
+      "name": "stock",
+      "ok": true,
+      "code": 200,
+      "latency_ms": 197.27,
+      "source": "stock_runtime_sqlite",
+      "items": 12754
+    },
+    {
+      "name": "prediction",
+      "ok": true,
+      "code": 200,
+      "latency_ms": 24.08,
+      "model": "ridge-regression",
+      "forecast_keys": [
+        "MP",
+        "CHIMIE",
+        "PDR"
+      ]
+    }
+  ],
+  "workflow": {
+    "invoke_ok": true,
+    "invoke_status": "interrupted",
+    "route": "react_orchestrator",
+    "latency_invoke_ms": 4427.17,
+    "resume_ok": true,
+    "resume_status": "ok",
+    "latency_resume_ms": 9479.33,
+    "resume_tools": [
+      "recipe_compute",
+      "stock_check",
+      "prediction_regression"
+    ],
+    "stock_consumption": {
+      "updates": [],
+      "count": 0
+    }
+  },
+  "dynamic_stock": {
+    "material_key": "pdr-con-02373",
+    "qty_before": 51.0,
+    "qty_after": 57.0,
+    "expected_delta": 6.0,
+    "real_delta": 6.0,
+    "movement_rows_added": 4,
+    "auto_restock_plan_ok": true,
+    "auto_restock_apply_ok": true,
+    "auto_restock_plan_count": 2,
+    "auto_restock_apply_count": 2,
+    "last_movements": [
+      [
+        "adjust",
+        "pdr-con-04535",
+        12.0,
+        "auto"
+      ],
+      [
+        "adjust",
+        "pdr-hyd-03405",
+        12.0,
+        "auto"
+      ],
+      [
+        "adjust",
+        "pdr-con-02373",
+        -4.0,
+        "minus"
+      ],
+      [
+        "adjust",
+        "pdr-con-02373",
+        10.0,
+        "plus"
+      ],
+      [
+        "adjust",
+        "pdr-mec-01834",
+        20.0,
+        "threshold refill"
+      ]
+    ]
+  },
+  "reasoning": {
+    "cases": 5,
+    "avg_latency_ms": 4337.57,
+    "max_latency_ms": 6276.86,
+    "statuses": [
+      "ok",
+      "ok",
+      "ok",
+      "interrupted",
+      "interrupted"
+    ]
+  },
+  "performance": {
+    "classification": {
+      "avg_ms": 1.5,
+      "min_ms": 1.33,
+      "max_ms": 1.88,
+      "p95_ms": 1.5
+    },
+    "stock": {
+      "avg_ms": 63.78,
+      "min_ms": 30.61,
+      "max_ms": 192.98,
+      "p95_ms": 33.58
+    },
+    "prediction": {
+      "avg_ms": 74.28,
+      "min_ms": 23.1,
+      "max_ms": 215.06,
+      "p95_ms": 52.59
+    }
+  },
+  "summary": {
+    "all_baseline_ok": true,
+    "all_tools_ok": true,
+    "workflow_ok": true,
+    "dynamic_stock_ok": true,
+    "reasoning_cases": 5
+  }
+}

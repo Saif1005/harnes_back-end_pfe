@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-05-06T15:51:47.135180Z",
+  "base_url": "http://127.0.0.1:8030",
+  "health": {
+    "ok": true,
+    "latency_ms": 2.98
+  },
+  "official_import": {
+    "ok": true,
+    "history_rows": 20000,
+    "current_items": 12754
+  }
+}
