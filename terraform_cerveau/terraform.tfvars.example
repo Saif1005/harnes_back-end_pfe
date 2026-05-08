@@ -1,0 +1,37 @@
+# Copier vers terraform.tfvars et adapter (ne pas committer terraform.tfvars si secrets).
+#
+# Si `terraform plan` affiche : « cached package … does not match checksums in the dependency lock file »,
+# le cache sous .terraform/ est incohérent (téléchargement interrompu, autre plateforme, etc.) :
+#   rm -rf .terraform && terraform init
+# Puis relancer `terraform plan`. Si besoin, régénérer le lock sur ta machine :
+#   rm -rf .terraform && rm .terraform.lock.hcl && terraform init
+# (ensuite versionner le nouveau .terraform.lock.hcl si tu travailles en équipe).
+
+region = "eu-west-3"
+
+# Instance EC2 dédiée au cerveau orchestrateur (distincte de l’instance PDR / GPU).
+orchestrator_instance_id = "i-06a5463912f787543"
+
+# Clé PEM pour SSH (Terraform copie le code et lance docker compose).
+ssh_private_key_path = "/home/saifakkari/PFE_Saif/saif_pipeline.pem"
+
+# Chemin absolu local vers le dossier cerveau_orchestrateur (celui qui contient Dockerfile).
+cerveau_src_dir = "/home/VOTRE_USER/PFE_Saif/Back-end/projet_industriel_agi/cerveau_orchestrateur"
+
+# URL de l’API classification sur l’AUTRE instance (Instance A / PDR), accessible depuis l’instance orchestrateur.
+# Exemple : IP publique ou privée selon VPC / security groups.
+url_instance_a = "http://IP_INSTANCE_PDR:8000/api/v1/classify"
+
+# Microservice recette (même machine en host network : 127.0.0.1 ; sinon IP privée/publique de l’hôte qui expose le port 8001).
+# url_recette_agent = "http://127.0.0.1:8001/api/v1/recette"
+
+# Ollama sur la même instance EC2 : http://127.0.0.1:11434 (voir docker-compose network_mode: host).
+ollama_base_url = "http://127.0.0.1:11434"
+ollama_model    = "mistral:7b-instruct"
+
+orchestrator_port = 8010
+
+# Optionnel : restreindre l’accès HTTP au port 8010.
+# open_ports_cidrs = ["VOTRE_IP_PUBLIQUE/32"]
+
+# aws_profile = "default"

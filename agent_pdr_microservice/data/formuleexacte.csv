@@ -1,0 +1,393 @@
+id_article_erp,machine_cible,occurences,probabilite_historique,quantite_standard_kg,score_final
+acide sulfurique,pm3::fluting,10,0.3704,0.0,0.2593
+acide sulfurique,pm2::kraft export,5,0.1852,0.0,0.1296
+acide sulfurique,pm2::test color,4,0.1481,0.0,0.1037
+acide sulfurique,pm2::testliner,4,0.1481,0.0,0.1037
+acide sulfurique,sotikraft,4,0.1481,0.0,0.1037
+agent collage asa,pm2::kraft export,6,0.25,3.2,1.135
+agent collage asa,sotikraft,5,0.2083,0.0,0.1458
+agent collage asa,pm2::test color,4,0.1667,0.0,0.1167
+agent collage asa,pm3::fluting,4,0.1667,0.0,0.1167
+agent collage asa,pm2::kraft,3,0.125,3.2,1.0475
+agent collage asa,pm2::testliner,2,0.0833,0.0,0.0583
+agent de collage,pm2::test color,1,0.3333,0.0,0.2333
+agent de collage,pm2::testliner,1,0.3333,0.0,0.2333
+agent de collage,sotikraft,1,0.3333,3.5,1.2833
+agent de collage akd,pm3::fluting,8,0.2353,0.0,0.1647
+agent de collage akd,pm2::testliner,7,0.2059,0.0,0.1441
+agent de collage akd,pm2::kraft export,6,0.1765,0.0,0.1235
+agent de collage akd,sotikraft,5,0.1471,0.0,0.103
+agent de collage akd,pm2::kraft,4,0.1176,0.0,0.0823
+agent de collage akd,pm2::test color,4,0.1176,0.0,0.0823
+agent de collage colophane,pm2::kraft export,6,0.1935,0.0,0.1354
+agent de collage colophane,pm3::fluting,6,0.1935,0.0,0.1354
+agent de collage colophane,sotikraft,6,0.1935,0.0,0.1354
+agent de collage colophane,pm2::test color,5,0.1613,0.0,0.1129
+agent de collage colophane,pm2::kraft,4,0.129,0.0,0.0903
+agent de collage colophane,pm2::testliner,4,0.129,0.0,0.0903
+agent de controle de la poix (talc),pm3::fluting,10,0.3333,0.0,0.2333
+agent de controle de la poix (talc),pm2::kraft,5,0.1667,0.0,0.1167
+agent de controle de la poix (talc),pm2::kraft export,5,0.1667,0.0,0.1167
+agent de controle de la poix (talc),pm2::testliner,4,0.1333,0.0,0.0933
+agent de controle de la poix (talc),sotikraft,4,0.1333,0.0,0.0933
+agent de controle de la poix (talc),pm2::test color,2,0.0667,0.0,0.0467
+amidon natif de mais,pm3::fluting,7,0.25,0.0,0.175
+amidon natif de mais,pm2::testliner,6,0.2143,0.0,0.15
+amidon natif de mais,sotikraft,6,0.2143,0.0,0.15
+amidon natif de mais,pm2::kraft export,4,0.1429,0.0,0.1
+amidon natif de mais,pm2::kraft,3,0.1071,0.0,0.075
+amidon natif de mais,pm2::test color,2,0.0714,0.0,0.05
+amidon oxyde,pm2::kraft,7,0.2692,0.0,0.1884
+amidon oxyde,pm3::fluting,7,0.2692,0.0,0.1884
+amidon oxyde,pm2::kraft export,4,0.1538,0.0,0.1077
+amidon oxyde,pm2::testliner,4,0.1538,0.0,0.1077
+amidon oxyde,pm2::test color,2,0.0769,0.0,0.0538
+amidon oxyde,sotikraft,2,0.0769,0.0,0.0538
+anti-mousse a base d'huile,pm3::fluting,10,0.3846,0.0,0.2692
+anti-mousse a base d'huile,pm2::kraft,5,0.1923,0.0,0.1346
+anti-mousse a base d'huile,pm2::testliner,4,0.1538,0.0,0.1077
+anti-mousse a base d'huile,sotikraft,4,0.1538,0.0,0.1077
+anti-mousse a base d'huile,pm2::test color,2,0.0769,0.0,0.0538
+anti-mousse a base d'huile,pm2::kraft export,1,0.0385,0.0,0.027
+anti-mousse silicone,pm3::fluting,10,0.4348,0.0,0.3044
+anti-mousse silicone,pm2::test color,4,0.1739,0.0,0.1217
+anti-mousse silicone,pm2::kraft export,3,0.1304,0.0,0.0913
+anti-mousse silicone,sotikraft,3,0.1304,0.0,0.0913
+anti-mousse silicone,pm2::testliner,2,0.087,0.0,0.0609
+anti-mousse silicone,pm2::kraft,1,0.0435,0.0,0.0304
+azurant optique (oba),pm3::fluting,9,0.3214,0.0,0.225
+azurant optique (oba),pm2::kraft export,5,0.1786,0.0,0.125
+azurant optique (oba),sotikraft,5,0.1786,0.0,0.125
+azurant optique (oba),pm2::kraft,3,0.1071,0.0,0.075
+azurant optique (oba),pm2::test color,3,0.1071,0.0,0.075
+azurant optique (oba),pm2::testliner,3,0.1071,0.0,0.075
+bentonite,pm3::fluting,10,0.2703,0.0,0.1892
+bentonite,pm2::testliner,7,0.1892,0.0,0.1324
+bentonite,pm2::kraft export,6,0.1622,0.0,0.1135
+bentonite,pm2::kraft,5,0.1351,0.0,0.0946
+bentonite,sotikraft,5,0.1351,0.0,0.0946
+bentonite,pm2::test color,4,0.1081,0.0,0.0757
+biocide non-oxydant,pm3::fluting,10,0.3333,0.0,0.2333
+biocide non-oxydant,pm2::kraft,5,0.1667,0.0,0.1167
+biocide non-oxydant,pm2::kraft export,5,0.1667,0.0,0.1167
+biocide non-oxydant,sotikraft,5,0.1667,0.0,0.1167
+biocide non-oxydant,pm2::testliner,3,0.1,0.0,0.07
+biocide non-oxydant,pm2::test color,2,0.0667,0.0,0.0467
+biocide oxydant,pm2::kraft,4,0.2353,0.0,0.1647
+biocide oxydant,pm2::test color,4,0.2353,0.0,0.1647
+biocide oxydant,pm3::fluting,3,0.1765,0.0,0.1235
+biocide oxydant,sotikraft,3,0.1765,0.0,0.1235
+biocide oxydant,pm2::testliner,2,0.1176,0.0,0.0823
+biocide oxydant,pm2::kraft export,1,0.0588,0.0,0.0412
+biocide ratio,pm3::fluting,12,0.3333,0.15,0.2783
+biocide ratio,pm2::kraft export,6,0.1667,0.15,0.1617
+biocide ratio,pm2::test color,5,0.1389,0.0,0.0972
+biocide ratio,sotikraft,5,0.1389,0.15,0.1422
+biocide ratio,pm2::kraft,4,0.1111,0.15,0.1228
+biocide ratio,pm2::testliner,4,0.1111,0.0,0.0778
+blancheur iso,pm3::fluting,10,0.3571,0.0,0.25
+blancheur iso,pm2::kraft,6,0.2143,0.0,0.15
+blancheur iso,pm2::test color,4,0.1429,0.0,0.1
+blancheur iso,sotikraft,4,0.1429,0.0,0.1
+blancheur iso,pm2::testliner,3,0.1071,0.0,0.075
+blancheur iso,pm2::kraft export,1,0.0357,0.0,0.025
+carbonate de calcium (gcc),pm3::fluting,7,0.25,0.0,0.175
+carbonate de calcium (gcc),pm2::kraft,5,0.1786,0.0,0.125
+carbonate de calcium (gcc),pm2::kraft export,5,0.1786,0.0,0.125
+carbonate de calcium (gcc),pm2::test color,5,0.1786,0.0,0.125
+carbonate de calcium (gcc),pm2::testliner,3,0.1071,0.0,0.075
+carbonate de calcium (gcc),sotikraft,3,0.1071,0.0,0.075
+colorant bleu direct,pm3::fluting,5,0.2381,0.0,0.1667
+colorant bleu direct,pm2::kraft,4,0.1905,0.0,0.1334
+colorant bleu direct,pm2::test color,4,0.1905,0.0,0.1334
+colorant bleu direct,sotikraft,4,0.1905,0.0,0.1334
+colorant bleu direct,pm2::kraft export,3,0.1429,0.0,0.1
+colorant bleu direct,pm2::testliner,1,0.0476,0.0,0.0333
+colorant jaune basique,pm3::fluting,10,0.5,0.0,0.35
+colorant jaune basique,pm2::kraft,3,0.15,0.0,0.105
+colorant jaune basique,pm2::test color,3,0.15,0.0,0.105
+colorant jaune basique,sotikraft,2,0.1,0.0,0.07
+colorant jaune basique,pm2::kraft export,1,0.05,0.0,0.035
+colorant jaune basique,pm2::testliner,1,0.05,0.0,0.035
+colorant rouge acide,pm3::fluting,8,0.2759,0.0,0.1931
+colorant rouge acide,pm2::kraft export,5,0.1724,0.0,0.1207
+colorant rouge acide,pm2::testliner,5,0.1724,0.0,0.1207
+colorant rouge acide,pm2::kraft,4,0.1379,0.0,0.0965
+colorant rouge acide,sotikraft,4,0.1379,0.0,0.0965
+colorant rouge acide,pm2::test color,3,0.1034,0.0,0.0724
+concentration de la pate (consistance),pm3::fluting,11,0.3333,0.0,0.2333
+concentration de la pate (consistance),pm2::kraft export,6,0.1818,0.0,0.1273
+concentration de la pate (consistance),pm2::kraft,5,0.1515,0.0,0.106
+concentration de la pate (consistance),pm2::testliner,4,0.1212,0.0,0.0848
+concentration de la pate (consistance),sotikraft,4,0.1212,0.0,0.0848
+concentration de la pate (consistance),pm2::test color,3,0.0909,0.0,0.0636
+conductivite,pm3::fluting,12,0.3,0.0,0.21
+conductivite,pm2::kraft export,7,0.175,0.0,0.1225
+conductivite,pm2::kraft,6,0.15,0.0,0.105
+conductivite,pm2::test color,6,0.15,0.0,0.105
+conductivite,sotikraft,5,0.125,0.0,0.0875
+conductivite,pm2::testliner,4,0.1,0.0,0.07
+copes de bois,pm3::fluting,6,0.3158,0.0,0.2211
+copes de bois,pm2::kraft,4,0.2105,0.0,0.1473
+copes de bois,pm2::test color,3,0.1579,0.0,0.1105
+copes de bois,pm2::testliner,3,0.1579,0.0,0.1105
+copes de bois,sotikraft,2,0.1053,0.0,0.0737
+copes de bois,pm2::kraft export,1,0.0526,0.0,0.0368
+defoamer 1 (afranil),pm3::fluting,11,0.2895,0.5,0.3526
+defoamer 1 (afranil),sotikraft,7,0.1842,0.5,0.2789
+defoamer 1 (afranil),pm2::kraft export,6,0.1579,1.5,0.5605
+defoamer 1 (afranil),pm2::kraft,5,0.1316,1.5,0.5421
+defoamer 1 (afranil),pm2::test color,5,0.1316,0.0,0.0921
+defoamer 1 (afranil),pm2::testliner,4,0.1053,0.0,0.0737
+defoamer 2 (erol),pm2::testliner,7,0.28,0.0,0.196
+defoamer 2 (erol),pm3::fluting,6,0.24,1.5,0.618
+defoamer 2 (erol),pm2::kraft,5,0.2,0.0,0.14
+defoamer 2 (erol),pm2::test color,3,0.12,0.0,0.084
+defoamer 2 (erol),pm2::kraft export,2,0.08,0.0,0.056
+defoamer 2 (erol),sotikraft,2,0.08,1.5,0.506
+demande chimique en oxygene (dco),pm3::fluting,8,0.2353,0.0,0.1647
+demande chimique en oxygene (dco),sotikraft,7,0.2059,0.0,0.1441
+demande chimique en oxygene (dco),pm2::test color,6,0.1765,0.0,0.1235
+demande chimique en oxygene (dco),pm2::kraft,5,0.1471,0.0,0.103
+demande chimique en oxygene (dco),pm2::kraft export,5,0.1471,0.0,0.103
+demande chimique en oxygene (dco),pm2::testliner,3,0.0882,0.0,0.0617
+dioxyde de titane (tio2),pm3::fluting,6,0.375,0.0,0.2625
+dioxyde de titane (tio2),pm2::test color,3,0.1875,0.0,0.1312
+dioxyde de titane (tio2),pm2::kraft,2,0.125,0.0,0.0875
+dioxyde de titane (tio2),pm2::testliner,2,0.125,0.0,0.0875
+dioxyde de titane (tio2),sotikraft,2,0.125,0.0,0.0875
+dioxyde de titane (tio2),pm2::kraft export,1,0.0625,0.0,0.0438
+dispersant synthetique,pm3::fluting,13,0.3514,0.0,0.246
+dispersant synthetique,pm2::kraft export,7,0.1892,0.0,0.1324
+dispersant synthetique,sotikraft,6,0.1622,0.0,0.1135
+dispersant synthetique,pm2::kraft,5,0.1351,0.0,0.0946
+dispersant synthetique,pm2::testliner,5,0.1351,0.0,0.0946
+dispersant synthetique,pm2::test color,1,0.027,0.0,0.0189
+eau de dilution,pm3::fluting,11,0.3143,0.0,0.22
+eau de dilution,pm2::kraft,6,0.1714,0.0,0.12
+eau de dilution,sotikraft,6,0.1714,0.0,0.12
+eau de dilution,pm2::test color,5,0.1429,0.0,0.1
+eau de dilution,pm2::kraft export,4,0.1143,0.0,0.08
+eau de dilution,pm2::testliner,3,0.0857,0.0,0.06
+epaisseur (caliper),pm2::kraft,7,0.2917,0.0,0.2042
+epaisseur (caliper),pm3::fluting,6,0.25,0.0,0.175
+epaisseur (caliper),pm2::test color,4,0.1667,0.0,0.1167
+epaisseur (caliper),pm2::kraft export,3,0.125,0.0,0.0875
+epaisseur (caliper),pm2::testliner,3,0.125,0.0,0.0875
+epaisseur (caliper),sotikraft,1,0.0417,0.0,0.0292
+fiber ratio,pm3::fluting,8,0.2667,1.204,0.5479
+fiber ratio,pm2::kraft,6,0.2,1.1,0.47
+fiber ratio,sotikraft,5,0.1667,1.204,0.4779
+fiber ratio,pm2::test color,4,0.1333,0.0,0.0933
+fiber ratio,pm2::testliner,4,0.1333,0.0,0.0933
+fiber ratio,pm2::kraft export,3,0.1,1.1,0.4
+flocon pulp ratio,pm3::fluting,9,0.3462,0.0,0.2423
+flocon pulp ratio,pm2::kraft,4,0.1538,0.27060000000000006,0.1888
+flocon pulp ratio,pm2::testliner,4,0.1538,0.0,0.1077
+flocon pulp ratio,sotikraft,4,0.1538,0.0,0.1077
+flocon pulp ratio,pm2::kraft export,3,0.1154,0.44000000000000006,0.2128
+flocon pulp ratio,pm2::test color,2,0.0769,0.0,0.0538
+fongicide,pm3::fluting,9,0.36,0.0,0.252
+fongicide,pm2::test color,5,0.2,0.0,0.14
+fongicide,pm2::testliner,5,0.2,0.0,0.14
+fongicide,pm2::kraft,3,0.12,0.0,0.084
+fongicide,sotikraft,3,0.12,0.0,0.084
+grammage cible,pm2::testliner,8,0.2051,0.0,0.1436
+grammage cible,pm3::fluting,8,0.2051,0.0,0.1436
+grammage cible,pm2::kraft export,7,0.1795,0.0,0.1256
+grammage cible,pm2::kraft,6,0.1538,0.0,0.1077
+grammage cible,pm2::test color,6,0.1538,0.0,0.1077
+grammage cible,sotikraft,4,0.1026,0.0,0.0718
+humidite finale,pm2::kraft export,9,0.2571,0.0,0.18
+humidite finale,pm3::fluting,6,0.1714,0.0,0.12
+humidite finale,pm2::kraft,5,0.1429,0.0,0.1
+humidite finale,pm2::test color,5,0.1429,0.0,0.1
+humidite finale,pm2::testliner,5,0.1429,0.0,0.1
+humidite finale,sotikraft,5,0.1429,0.0,0.1
+indice d'eclatement (burst),pm3::fluting,7,0.3889,0.0,0.2722
+indice d'eclatement (burst),pm2::kraft export,3,0.1667,0.0,0.1167
+indice d'eclatement (burst),pm2::test color,3,0.1667,0.0,0.1167
+indice d'eclatement (burst),pm2::kraft,2,0.1111,0.0,0.0778
+indice d'eclatement (burst),sotikraft,2,0.1111,0.0,0.0778
+indice d'eclatement (burst),pm2::testliner,1,0.0556,0.0,0.0389
+indice de dechirement,pm3::fluting,8,0.2759,0.0,0.1931
+indice de dechirement,pm2::testliner,6,0.2069,0.0,0.1448
+indice de dechirement,pm2::test color,5,0.1724,0.0,0.1207
+indice de dechirement,pm2::kraft,4,0.1379,0.0,0.0965
+indice de dechirement,pm2::kraft export,3,0.1034,0.0,0.0724
+indice de dechirement,sotikraft,3,0.1034,0.0,0.0724
+kaolin calcine,pm3::fluting,6,0.24,0.0,0.168
+kaolin calcine,pm2::testliner,5,0.2,0.0,0.14
+kaolin calcine,sotikraft,5,0.2,0.0,0.14
+kaolin calcine,pm2::kraft,4,0.16,0.0,0.112
+kaolin calcine,pm2::test color,4,0.16,0.0,0.112
+kaolin calcine,pm2::kraft export,1,0.04,0.0,0.028
+krofta polymer ratio,pm2::testliner,8,0.3077,0.0,0.2154
+krofta polymer ratio,pm3::fluting,6,0.2308,0.37,0.2726
+krofta polymer ratio,pm2::test color,5,0.1923,0.0,0.1346
+krofta polymer ratio,pm2::kraft,4,0.1538,0.25,0.1827
+krofta polymer ratio,pm2::kraft export,2,0.0769,0.25,0.1288
+krofta polymer ratio,sotikraft,1,0.0385,0.37,0.138
+microparticules de silice,pm3::fluting,14,0.4118,0.0,0.2883
+microparticules de silice,pm2::kraft export,6,0.1765,0.0,0.1235
+microparticules de silice,pm2::test color,5,0.1471,0.0,0.103
+microparticules de silice,pm2::kraft,4,0.1176,0.0,0.0823
+microparticules de silice,sotikraft,3,0.0882,0.0,0.0617
+microparticules de silice,pm2::testliner,2,0.0588,0.0,0.0412
+opacite,pm2::kraft,8,0.2424,0.0,0.1697
+opacite,pm3::fluting,7,0.2121,0.0,0.1485
+opacite,pm2::kraft export,6,0.1818,0.0,0.1273
+opacite,pm2::test color,5,0.1515,0.0,0.106
+opacite,pm2::testliner,4,0.1212,0.0,0.0848
+opacite,sotikraft,3,0.0909,0.0,0.0636
+pac,sotikraft,6,0.2727,3.5,1.2409
+pac,pm2::test color,5,0.2273,0.0,0.1591
+pac,pm3::fluting,4,0.1818,0.0,0.1273
+pac,pm2::testliner,3,0.1364,0.0,0.0955
+pac,pm2::kraft,2,0.0909,0.0,0.0636
+pac,pm2::kraft export,2,0.0909,0.0,0.0636
+pate desencree (dip),pm2::test color,6,0.3,0.0,0.21
+pate desencree (dip),pm2::testliner,4,0.2,0.0,0.14
+pate desencree (dip),pm3::fluting,4,0.2,0.0,0.14
+pate desencree (dip),pm2::kraft export,3,0.15,0.0,0.105
+pate desencree (dip),sotikraft,3,0.15,0.0,0.105
+pate kraft blanchie de feuillus (bhkp),pm3::fluting,6,0.3529,0.0,0.247
+pate kraft blanchie de feuillus (bhkp),pm2::kraft export,3,0.1765,0.0,0.1235
+pate kraft blanchie de feuillus (bhkp),pm2::testliner,3,0.1765,0.0,0.1235
+pate kraft blanchie de feuillus (bhkp),pm2::kraft,2,0.1176,0.0,0.0823
+pate kraft blanchie de feuillus (bhkp),sotikraft,2,0.1176,0.0,0.0823
+pate kraft blanchie de feuillus (bhkp),pm2::test color,1,0.0588,0.0,0.0412
+pate kraft blanchie de resineux (nbsk),pm3::fluting,10,0.3333,0.0,0.2333
+pate kraft blanchie de resineux (nbsk),pm2::kraft export,6,0.2,0.0,0.14
+pate kraft blanchie de resineux (nbsk),pm2::test color,6,0.2,0.0,0.14
+pate kraft blanchie de resineux (nbsk),pm2::kraft,3,0.1,0.0,0.07
+pate kraft blanchie de resineux (nbsk),pm2::testliner,3,0.1,0.0,0.07
+pate kraft blanchie de resineux (nbsk),sotikraft,2,0.0667,0.0,0.0467
+pate mecanique (tmp),sotikraft,5,0.3125,0.0,0.2188
+pate mecanique (tmp),pm2::kraft,3,0.1875,0.0,0.1312
+pate mecanique (tmp),pm2::test color,3,0.1875,0.0,0.1312
+pate mecanique (tmp),pm2::testliner,3,0.1875,0.0,0.1312
+pate mecanique (tmp),pm3::fluting,2,0.125,0.0,0.0875
+pate recyclee (occ),pm3::fluting,8,0.2857,0.0,0.2
+pate recyclee (occ),pm2::test color,5,0.1786,0.0,0.125
+pate recyclee (occ),sotikraft,5,0.1786,0.0,0.125
+pate recyclee (occ),pm2::testliner,4,0.1429,0.0,0.1
+pate recyclee (occ),pm2::kraft,3,0.1071,0.0,0.075
+pate recyclee (occ),pm2::kraft export,3,0.1071,0.0,0.075
+ph de caisse de tete,pm3::fluting,7,0.2593,0.0,0.1815
+ph de caisse de tete,pm2::test color,6,0.2222,0.0,0.1555
+ph de caisse de tete,pm2::testliner,5,0.1852,0.0,0.1296
+ph de caisse de tete,pm2::kraft export,4,0.1481,0.0,0.1037
+ph de caisse de tete,sotikraft,3,0.1111,0.0,0.0778
+ph de caisse de tete,pm2::kraft,2,0.0741,0.0,0.0519
+polymere de retention cationique,pm2::kraft,6,0.2308,0.0,0.1616
+polymere de retention cationique,pm3::fluting,6,0.2308,0.0,0.1616
+polymere de retention cationique,pm2::kraft export,4,0.1538,0.0,0.1077
+polymere de retention cationique,pm2::test color,4,0.1538,0.0,0.1077
+polymere de retention cationique,sotikraft,4,0.1538,0.0,0.1077
+polymere de retention cationique,pm2::testliner,2,0.0769,0.0,0.0538
+porosite gurley,pm2::kraft,7,0.2692,0.0,0.1884
+porosite gurley,pm3::fluting,7,0.2692,0.0,0.1884
+porosite gurley,sotikraft,4,0.1538,0.0,0.1077
+porosite gurley,pm2::kraft export,3,0.1154,0.0,0.0808
+porosite gurley,pm2::testliner,3,0.1154,0.0,0.0808
+porosite gurley,pm2::test color,2,0.0769,0.0,0.0538
+potentiel zeta,sotikraft,7,0.3333,0.0,0.2333
+potentiel zeta,pm2::kraft,4,0.1905,0.0,0.1334
+potentiel zeta,pm2::kraft export,3,0.1429,0.0,0.1
+potentiel zeta,pm3::fluting,3,0.1429,0.0,0.1
+potentiel zeta,pm2::test color,2,0.0952,0.0,0.0666
+potentiel zeta,pm2::testliner,2,0.0952,0.0,0.0666
+pression des presses,pm2::kraft,5,0.2174,0.0,0.1522
+pression des presses,pm3::fluting,5,0.2174,0.0,0.1522
+pression des presses,pm2::kraft export,4,0.1739,0.0,0.1217
+pression des presses,pm2::test color,4,0.1739,0.0,0.1217
+pression des presses,sotikraft,4,0.1739,0.0,0.1217
+pression des presses,pm2::testliner,1,0.0435,0.0,0.0304
+prestige cleaning aids ratio (prestige),pm3::fluting,9,0.3103,0.0,0.2172
+prestige cleaning aids ratio (prestige),pm2::kraft,8,0.2759,0.4,0.3131
+prestige cleaning aids ratio (prestige),pm2::kraft export,5,0.1724,0.4,0.2407
+prestige cleaning aids ratio (prestige),pm2::test color,3,0.1034,0.0,0.0724
+prestige cleaning aids ratio (prestige),pm2::testliner,3,0.1034,0.0,0.0724
+prestige cleaning aids ratio (prestige),sotikraft,1,0.0345,0.0,0.0242
+pulp ratio,pm3::fluting,8,0.3333,0.0,0.2333
+pulp ratio,pm2::kraft,6,0.25,0.82,0.421
+pulp ratio,pm2::test color,4,0.1667,0.0,0.1167
+pulp ratio,pm2::kraft export,3,0.125,0.0,0.0875
+pulp ratio,sotikraft,2,0.0833,0.0,0.0583
+pulp ratio,pm2::testliner,1,0.0417,0.0,0.0292
+resine de resistance a l'etat humide (pae),pm3::fluting,10,0.2857,0.0,0.2
+resine de resistance a l'etat humide (pae),sotikraft,8,0.2286,0.0,0.16
+resine de resistance a l'etat humide (pae),pm2::kraft,7,0.2,0.0,0.14
+resine de resistance a l'etat humide (pae),pm2::kraft export,4,0.1143,0.0,0.08
+resine de resistance a l'etat humide (pae),pm2::testliner,4,0.1143,0.0,0.08
+resine de resistance a l'etat humide (pae),pm2::test color,2,0.0571,0.0,0.04
+resine de resistance a sec,pm3::fluting,6,0.2609,0.0,0.1826
+resine de resistance a sec,sotikraft,6,0.2609,0.0,0.1826
+resine de resistance a sec,pm2::kraft,5,0.2174,0.0,0.1522
+resine de resistance a sec,pm2::test color,3,0.1304,0.0,0.0913
+resine de resistance a sec,pm2::kraft export,2,0.087,0.0,0.0609
+resine de resistance a sec,pm2::testliner,1,0.0435,0.0,0.0304
+retention aids ratio,pm2::testliner,6,0.2143,0.0,0.15
+retention aids ratio,pm3::fluting,6,0.2143,0.37,0.261
+retention aids ratio,sotikraft,6,0.2143,0.37,0.261
+retention aids ratio,pm2::test color,5,0.1786,0.0,0.125
+retention aids ratio,pm2::kraft export,3,0.1071,0.27,0.156
+retention aids ratio,pm2::kraft,2,0.0714,0.27,0.131
+rugosite bendtsen,pm3::fluting,9,0.2903,0.0,0.2032
+rugosite bendtsen,sotikraft,6,0.1935,0.0,0.1354
+rugosite bendtsen,pm2::kraft export,5,0.1613,0.0,0.1129
+rugosite bendtsen,pm2::test color,5,0.1613,0.0,0.1129
+rugosite bendtsen,pm2::testliner,5,0.1613,0.0,0.1129
+rugosite bendtsen,pm2::kraft,1,0.0323,0.0,0.0226
+size press,pm3::fluting,11,0.2973,0.0,0.2081
+size press,pm2::kraft,8,0.2162,0.0,0.1513
+size press,pm2::test color,8,0.2162,0.0,0.1513
+size press,pm2::kraft export,4,0.1081,0.0,0.0757
+size press,sotikraft,4,0.1081,0.0,0.0757
+size press,pm2::testliner,2,0.0541,0.0,0.0379
+soude caustique (naoh),pm2::test color,7,0.28,0.0,0.196
+soude caustique (naoh),pm2::kraft,5,0.2,0.0,0.14
+soude caustique (naoh),pm3::fluting,5,0.2,0.0,0.14
+soude caustique (naoh),sotikraft,4,0.16,0.0,0.112
+soude caustique (naoh),pm2::kraft export,2,0.08,0.0,0.056
+soude caustique (naoh),pm2::testliner,2,0.08,0.0,0.056
+standard pulp ratio,pm2::testliner,7,0.2188,0.0,0.1532
+standard pulp ratio,pm3::fluting,7,0.2188,0.0,0.1532
+standard pulp ratio,pm2::kraft export,6,0.1875,0.66,0.3292
+standard pulp ratio,pm2::kraft,5,0.1562,0.5493999999999999,0.2742
+standard pulp ratio,pm2::test color,4,0.125,0.0,0.0875
+standard pulp ratio,sotikraft,3,0.0938,0.0,0.0657
+starch cationic ratio,pm3::fluting,8,0.2424,33.0,10.0697
+starch cationic ratio,pm2::testliner,6,0.1818,0.0,0.1273
+starch cationic ratio,pm2::kraft export,5,0.1515,26.0,7.906
+starch cationic ratio,pm2::test color,5,0.1515,0.0,0.106
+starch cationic ratio,sotikraft,5,0.1515,12.0,3.706
+starch cationic ratio,pm2::kraft,4,0.1212,26.0,7.8848
+starch oxidized ratio,pm3::fluting,1,0.5,0.0,0.35
+starch oxidized ratio,sotikraft,1,0.5,100.0,30.35
+sulfate d'aluminium (alun),pm2::test color,8,0.2667,0.0,0.1867
+sulfate d'aluminium (alun),pm3::fluting,8,0.2667,0.0,0.1867
+sulfate d'aluminium (alun),sotikraft,6,0.2,0.0,0.14
+sulfate d'aluminium (alun),pm2::testliner,4,0.1333,0.0,0.0933
+sulfate d'aluminium (alun),pm2::kraft export,3,0.1,0.0,0.07
+sulfate d'aluminium (alun),pm2::kraft,1,0.0333,0.0,0.0233
+temperature de sechage,pm2::kraft export,8,0.3333,0.0,0.2333
+temperature de sechage,pm2::testliner,4,0.1667,0.0,0.1167
+temperature de sechage,sotikraft,4,0.1667,0.0,0.1167
+temperature de sechage,pm2::kraft,3,0.125,0.0,0.0875
+temperature de sechage,pm2::test color,3,0.125,0.0,0.0875
+temperature de sechage,pm3::fluting,2,0.0833,0.0,0.0583
+vitesse machine,pm3::fluting,12,0.4286,0.0,0.3
+vitesse machine,pm2::test color,6,0.2143,0.0,0.15
+vitesse machine,sotikraft,4,0.1429,0.0,0.1
+vitesse machine,pm2::kraft,2,0.0714,0.0,0.05
+vitesse machine,pm2::kraft export,2,0.0714,0.0,0.05
+vitesse machine,pm2::testliner,2,0.0714,0.0,0.05
+waste paper ratio,pm3::fluting,2,0.3333,1.204,0.5945
+waste paper ratio,pm2::kraft,1,0.1667,0.28,0.2007
+waste paper ratio,pm2::test color,1,0.1667,0.0,0.1167
+waste paper ratio,pm2::testliner,1,0.1667,0.0,0.1167
+waste paper ratio,sotikraft,1,0.1667,1.204,0.4779
+wet end,pm2::test color,1,0.5,0.0,0.35
+wet end,sotikraft,1,0.5,7.5,2.6

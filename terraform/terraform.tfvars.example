@@ -1,0 +1,37 @@
+# Copier vers terraform.tfvars (non versionné) et adapter.
+# Exemple cible : instance_tools_A — i-06a5463912f787543 (eu-west-3)
+
+region = "eu-west-3"
+
+existing_instance_id = "i-06a5463912f787543"
+key_name             = "saif_pipeline"
+
+ssh_private_key_path = "/home/saifakkari/PFE_Saif/saif_pipeline.pem"
+ssh_user             = "ubuntu"
+
+allowed_ssh_cidr = "0.0.0.0/0"
+open_ports_cidrs = ["0.0.0.0/0"]
+
+project_src_dir   = "/home/saifakkari/PFE_Saif/Back-end/projet_industriel_agi"
+remote_deploy_dir = "/home/ubuntu/projet_industriel_agi"
+
+# true = lance agent-pdr-train pendant apply (long, GPU + données requises)
+deploy_train_agent_pdr       = false
+deploy_train_agent_pdr_async = true
+deploy_start_agent_pdr       = true
+
+# Services supplémentaires (docker-compose)
+deploy_start_agent_classification = true # port 8001 — nécessite models_saved/xlm_roberta_large_mp_chimie entraîné
+deploy_start_agent_recette        = true # port 8002 — Ollama sur l’hôte (host.docker.internal)
+
+# false par défaut : les ports sont souvent déjà ouverts → évite InvalidPermission.Duplicate
+manage_existing_instance_sg_ingress = false
+
+# Copie vers l’EC2 : rsync (défaut) + timeout SSH
+deploy_use_rsync          = true
+ssh_connection_timeout    = "45m"
+# deploy_rsync_excludes  = [".git/", "local_models/", ...]  # optionnel
+
+name = "instance-tools-A"
+
+# aws_profile = "default"

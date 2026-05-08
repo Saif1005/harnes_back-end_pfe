@@ -1,0 +1,33 @@
+# Image dédiée : API classification MP vs CHIMIE (XLM-RoBERTa-large).
+# Les poids ne sont pas COPY ici (plusieurs Go) : docker-compose monte
+# ./agent_pdr_microservice/models_saved/xlm_roberta_large_mp_chimie sur /app/models_saved/...
+# PyTorch CUDA (même stack que Dockerfile agent-pdr : Tesla T4 / driver récent → cu121).
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    CLASSIFICATION_MODEL_DIR=/app/models_saved/xlm_roberta_large_mp_chimie
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements-classification.txt /app/requirements-classification.txt
+
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cu121 \
+      torch==2.2.2 && \
+    pip install --no-cache-dir -r /app/requirements-classification.txt && \
+    python -c "import torch; assert torch.version.cuda is not None and torch.backends.cuda.is_built(), f'Invalid torch build: version={torch.__version__}, cuda={torch.version.cuda}, built={torch.backends.cuda.is_built()}'"
+
+# Répertoire cible pour le bind-mount compose (vide dans l’image).
+RUN mkdir -p /app/models_saved/xlm_roberta_large_mp_chimie
+
+COPY src/__init__.py /app/src/__init__.py
+COPY src/agent /app/src/agent
+
+EXPOSE 8001
+
+CMD ["uvicorn", "src.agent.agent_classification:app", "--host", "0.0.0.0", "--port", "8001"]

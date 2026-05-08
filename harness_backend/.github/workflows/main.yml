@@ -1,0 +1,192 @@
+name: Harness CI/CD
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Compile
+        run: |
+          set -euo pipefail
+          python -m compileall .
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        if: ${{ false }}
+        run: echo "Skipping AWS API lookup; using fixed EC2 host"
+
+      - name: Prepare SSH key
+        run: |
+          set -euo pipefail
+          printf '%s\n' "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+          ssh-keygen -y -f key.pem > /dev/null
+
+      - name: Set fixed target host
+        id: resolve_host
+        run: |
+          set -euo pipefail
+          # Fixed test instance provided by project owner.
+          HOST="13.39.163.86"
+          echo "host=$HOST" >> "$GITHUB_OUTPUT"
+
+      - name: SSH smoke test
+        run: |
+          set -euo pipefail
+          ssh -i key.pem -o StrictHostKeyChecking=no -o ConnectTimeout=20 ubuntu@${{ steps.resolve_host.outputs.host }} "echo REMOTE_OK"
+
+      - name: Bootstrap remote folder
+        run: |
+          set -euo pipefail
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} \
+            "mkdir -p /home/ubuntu/projet_industriel_agi/repo"
+
+      - name: Sync files
+        run: |
+          set -euo pipefail
+          tar --exclude='.git' -czf /tmp/harness_backend.tar.gz .
+          scp -i key.pem -o StrictHostKeyChecking=no /tmp/harness_backend.tar.gz \
+            ubuntu@${{ steps.resolve_host.outputs.host }}:/tmp/harness_backend.tar.gz
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} '
+            set -euo pipefail
+            rm -rf /home/ubuntu/projet_industriel_agi/repo/*
+            tar -xzf /tmp/harness_backend.tar.gz -C /home/ubuntu/projet_industriel_agi/repo
+            rm -f /tmp/harness_backend.tar.gz
+          '
+
+      - name: Ensure Docker exists
+        run: |
+          set -euo pipefail
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} '
+            if ! command -v docker >/dev/null 2>&1; then
+              sudo apt-get update
+              sudo apt-get install -y docker.io docker-compose-plugin
+              sudo systemctl enable docker
+              sudo systemctl start docker
+            fi
+          '
+
+      - name: Ensure Ollama exists and pull models
+        run: |
+          set -euo pipefail
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} '
+            set -euo pipefail
+            if ! command -v zstd >/dev/null 2>&1; then
+              sudo apt-get update
+              sudo apt-get install -y zstd
+            fi
+            if ! command -v ollama >/dev/null 2>&1; then
+              curl -fsSL https://ollama.com/install.sh | sh
+            fi
+            sudo mkdir -p /etc/systemd/system/ollama.service.d
+            cat <<'EOF' | sudo tee /etc/systemd/system/ollama.service.d/override.conf >/dev/null
+[Service]
+Environment=OLLAMA_HOST=0.0.0.0:11434
+EOF
+            sudo systemctl daemon-reload
+            sudo systemctl enable ollama || true
+            sudo systemctl start ollama || true
+            sleep 5
+            ollama pull mistral:7b
+            ollama pull qwen2.5:7b-instruct || ollama pull qwen2.5:7b
+            ollama list
+          '
+
+      - name: Bootstrap data directories and minimal CSV
+        run: |
+          set -euo pipefail
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} '
+            set -euo pipefail
+            sudo mkdir -p /opt/harness/data /opt/harness/models /opt/harness/db
+            sudo chmod -R 777 /opt/harness/data /opt/harness/models /opt/harness/db || true
+
+            # Minimal dataset required by stock_check / rebuild_stock_base_from_dataset
+            if [ ! -f /opt/harness/data/dataset_classification_compatible.csv ]; then
+              echo "texte,label,quantity_kg" | sudo tee /opt/harness/data/dataset_classification_compatible.csv >/dev/null
+              echo "Kraft pour sacs,MP,1000" | sudo tee -a /opt/harness/data/dataset_classification_compatible.csv >/dev/null
+            fi
+
+            # Minimal recipe correlation required when legacy recipe service is unavailable
+            if [ ! -f /opt/harness/data/correlation_qualite_ingredients_recette.csv ]; then
+              cat <<'EOF' | sudo tee /opt/harness/data/correlation_qualite_ingredients_recette.csv >/dev/null
+family_pf,ingredient,ratio_kg_per_ton
+Kraft pour sacs,Vieux papier,800
+Kraft pour sacs,Amidon cationique,10
+Kraft pour sacs,Biocide,2
+EOF
+            fi
+          '
+
+      - name: Deploy stack
+        run: |
+          set -euo pipefail
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} '
+            set -euo pipefail
+            cd /home/ubuntu/projet_industriel_agi/repo
+
+            docker build -t harness-backend:latest .
+
+            docker rm -f harness-backend || true
+            docker run -d --name harness-backend \
+              --restart unless-stopped \
+              -p 8030:8030 \
+              -v /opt/harness/data:/opt/harness/data \
+              -v /opt/harness/models:/opt/harness/models \
+              -v /opt/harness/db:/opt/harness/db \
+              --add-host=host.docker.internal:host-gateway \
+              -e MCP_ENABLED=true \
+              -e MCP_TRANSPORT=http \
+              -e MCP_SERVER_URL=http://127.0.0.1:8040/mcp/tool-call \
+              -e SUPERVISOR_USE_LLM=true \
+              -e ORCHESTRATOR_REACT_ENABLED=true \
+              -e ORCHESTRATOR_MODEL=mistral:7b \
+              -e REASONING_MCMC_STEPS=8 \
+              -e REASONING_MCMC_TEMPERATURE=0.15 \
+              -e OLLAMA_BASE_URL=http://host.docker.internal:11434 \
+              -e RECIPE_USE_LLM=true \
+              -e RECIPE_LLM_MODEL=qwen2.5:7b-instruct \
+              -e CLASSIFICATION_MODEL_NAME=xlm-roberta-large \
+              -e PREDICTION_MODEL_NAME=ridge-regression \
+              harness-backend:latest
+          '
+
+      - name: Health check API
+        run: |
+          set -euo pipefail
+          for i in {1..20}; do
+            if ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ steps.resolve_host.outputs.host }} \
+              "curl -fsS http://127.0.0.1:8030/health >/dev/null"; then
+              echo "Harness backend is healthy on instance localhost:8030"
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "Health check failed for instance-local http://127.0.0.1:8030/health"
+          exit 1

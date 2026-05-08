@@ -1,0 +1,34 @@
+# Contexte Docker : ./agent_pdr_microservice (Dockerfile, Dockerfile.classification)
+# Réduit fortement « transferring build context » (ex. données, autres checkpoints).
+
+# VCS / IDE
+.git
+.gitignore
+.cursor
+.vscode
+.idea
+*.swp
+.DS_Store
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+.pytest_cache
+.mypy_cache
+.ruff_cache
+*.egg-info
+.venv
+venv
+env
+
+# Données (montées en volume au runtime ; non COPY dans les Dockerfiles)
+data
+
+# Checkpoints : non embarqués dans l’image classification (volume compose au runtime).
+models_saved
+
+# Outils / logs locaux
+*.log
+.wandb
+wandb

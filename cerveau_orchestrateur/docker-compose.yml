@@ -1,0 +1,63 @@
+# Linux (EC2): host network pour accéder simplement aux services locaux:
+# - agent-pdr:8000
+# - agent-classification:8001
+# - agent-recette:8002
+# - ollama:11434
+services:
+  cerveau:
+    build: .
+    image: cerveau-orchestrateur:local
+    container_name: cerveau-orchestrateur
+    network_mode: host
+    env_file:
+      - .env
+    environment:
+      # APIs microservices
+      URL_INSTANCE_A: ${URL_INSTANCE_A:-http://127.0.0.1:8000/api/v1/classify}
+      URL_CLASSIFICATION_MP_CHIMIE: ${URL_CLASSIFICATION_MP_CHIMIE:-http://127.0.0.1:8001/api/v1/classify}
+      URL_RECETTE_AGENT: ${URL_RECETTE_AGENT:-http://127.0.0.1:8002/api/v1/recette}
+
+      # Supervisor LLM
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://127.0.0.1:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-mistral:7b-instruct}
+
+      # LangSmith tracing (UI monitoring)
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING:-true}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY:-${LANGCHAIN_API_KEY:-}}
+      LANGSMITH_PROJECT: ${LANGSMITH_PROJECT:-sotipapier-production}
+      LANGSMITH_ENDPOINT: ${LANGSMITH_ENDPOINT:-https://api.smith.langchain.com}
+      # Aliases compatibilité LangChain
+      LANGCHAIN_TRACING_V2: ${LANGSMITH_TRACING:-true}
+      LANGCHAIN_API_KEY: ${LANGCHAIN_API_KEY:-${LANGSMITH_API_KEY:-}}
+      LANGCHAIN_PROJECT: ${LANGSMITH_PROJECT:-sotipapier-production}
+      LANGCHAIN_ENDPOINT: ${LANGSMITH_ENDPOINT:-https://api.smith.langchain.com}
+
+      # Pipeline stock réel (Excel usine + double classification)
+      INVENTORY_EXCEL_PATH: ${INVENTORY_EXCEL_PATH:-/app/data_sources/piece_de_rechange_data/ECA_PDR_31122023_Raw(AutoRecovered).csv.xlsx}
+      INVENTORY_DASHBOARD_TOP_N: ${INVENTORY_DASHBOARD_TOP_N:-20}
+      INVENTORY_CLASSIFICATION_MAX_ITEMS: ${INVENTORY_CLASSIFICATION_MAX_ITEMS:-500}
+      INVENTORY_CLASSIFICATION_CONCURRENCY: ${INVENTORY_CLASSIFICATION_CONCURRENCY:-20}
+
+      # Frontend (Vite local ou URL déployée) — requis pour appels navigateur → API sur EC2
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://127.0.0.1:5173}
+      DATABASE_URL: ${DATABASE_URL:-sqlite:////tmp/cerveau.db}
+      AUTH_SECRET_KEY: ${AUTH_SECRET_KEY:-CHANGE_ME_SECRET_KEY_SOTIPAPIER}
+      AUTH_ALGORITHM: ${AUTH_ALGORITHM:-HS256}
+      AUTH_ACCESS_TOKEN_EXPIRE_MINUTES: ${AUTH_ACCESS_TOKEN_EXPIRE_MINUTES:-480}
+      AUTH_GOOGLE_CLIENT_IDS: ${AUTH_GOOGLE_CLIENT_IDS:-}
+      AUTH_ADMIN_BOOTSTRAP_KEY: ${AUTH_ADMIN_BOOTSTRAP_KEY:-}
+      AUTH_ADMIN_EMAILS: ${AUTH_ADMIN_EMAILS:-}
+      ERP_SQL_CONNECT_TIMEOUT_SECONDS: ${ERP_SQL_CONNECT_TIMEOUT_SECONDS:-5}
+      SELF_LEARNING_DB_LONG_MEMORY_PATH: ${SELF_LEARNING_DB_LONG_MEMORY_PATH:-/tmp/db_long_memory}
+      S3_MEMORY_BUCKET: ${S3_MEMORY_BUCKET:-}
+      S3_SQLITE_KEY: ${S3_SQLITE_KEY:-runtime/cerveau.db}
+      S3_SQLITE_SNAPSHOT_PREFIX: ${S3_SQLITE_SNAPSHOT_PREFIX:-runtime/snapshots}
+      S3_SQLITE_SYNC_INTERVAL_SECONDS: ${S3_SQLITE_SYNC_INTERVAL_SECONDS:-180}
+
+      PYTHONUNBUFFERED: "1"
+
+    # Le fichier réel est monté pour que l'orchestrateur construise la base stock personnalisée.
+    volumes:
+      - ../data_sources:/app/data_sources:ro
+
+    restart: unless-stopped

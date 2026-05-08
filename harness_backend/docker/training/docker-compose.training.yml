@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  harness-train-classification:
+    build:
+      context: ../../..
+      dockerfile: harness_backend/docker/training/Dockerfile.classification-train
+    container_name: harness-train-classification
+    restart: "no"
+    volumes:
+      - ../../../harness_backend:/app/harness_backend
+      - ../../../scripts:/app/scripts
+      - /opt/harness/data:/opt/harness/data
+      - /opt/harness/models:/opt/harness/models
+      - /opt/harness/db:/opt/harness/db
+
+  harness-train-prediction:
+    build:
+      context: ../../..
+      dockerfile: harness_backend/docker/training/Dockerfile.prediction-train
+    container_name: harness-train-prediction
+    restart: "no"
+    volumes:
+      - ../../../harness_backend:/app/harness_backend
+      - ../../../scripts:/app/scripts
+      - /opt/harness/data:/opt/harness/data
+      - /opt/harness/models:/opt/harness/models
+      - /opt/harness/db:/opt/harness/db
+

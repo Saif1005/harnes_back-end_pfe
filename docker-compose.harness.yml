@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  harness-mcp-server:
+    build:
+      context: .
+      dockerfile: harness_backend/Dockerfile
+    container_name: harness-mcp-server
+    restart: unless-stopped
+    command: ["uvicorn", "harness_backend.mcp_server_main:app", "--host", "0.0.0.0", "--port", "8040"]
+    ports:
+      - "8040:8040"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - DATA_ROOT=/opt/harness/data
+      - MODELS_ROOT=/opt/harness/models
+      - DB_ROOT=/opt/harness/db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      # Overlay code à l’emplacement réel utilisé par le Dockerfile (WORKDIR /srv, PYTHONPATH=/srv).
+      - ./harness_backend:/srv/harness_backend
+      - /opt/harness/data:/opt/harness/data
+      - /opt/harness/models:/opt/harness/models
+      - /opt/harness/db:/opt/harness/db
+
+  harness-backend:
+    build:
+      context: .
+      dockerfile: harness_backend/Dockerfile
+    container_name: harness-backend
+    restart: unless-stopped
+    ports:
+      - "8030:8030"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - MCP_ENABLED=true
+      - MCP_SERVER_URL=http://harness-mcp-server:8040/mcp/tool-call
+      - SUPERVISOR_USE_LLM=true
+      - DATA_ROOT=/opt/harness/data
+      - MODELS_ROOT=/opt/harness/models
+      - DB_ROOT=/opt/harness/db
+      - RUNTIME_DB_PATH=/opt/harness/db/runtime.sqlite
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - harness-mcp-server
+    volumes:
+      - ./harness_backend:/srv/harness_backend
+      - /opt/harness/data:/opt/harness/data
+      - /opt/harness/models:/opt/harness/models
+      - /opt/harness/db:/opt/harness/db
+

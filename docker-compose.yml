@@ -1,0 +1,153 @@
+# =============================================================================
+# Microservices Sotipapier
+# - agent-pdr (8000) : classification historique MP/PDR (local_models)
+# - agent-classification (8001) : MP vs CHIMIE (models_saved/xlm_roberta_large_mp_chimie)
+# - agent_recette (8002→8001) : agent recette + Ollama via host.docker.internal
+#
+# LangSmith : .env avec LANGSMITH_API_KEY. agent_recette (LangChain) + classification / PDR (@traceable).
+# Workspace EU : LANGSMITH_ENDPOINT=https://eu.api.smith.langchain.com
+# =============================================================================
+# Clé API : uniquement dans .env (LANGSMITH_API_KEY ou LANGCHAIN_API_KEY). Jamais de valeur par défaut avec secret ici.
+x-langsmith-env: &langsmith_env
+  LANGSMITH_TRACING: "true"
+  LANGSMITH_API_KEY: ${LANGSMITH_API_KEY:-${LANGCHAIN_API_KEY:-}}
+  LANGSMITH_PROJECT: ${LANGSMITH_PROJECT:-${LANGCHAIN_PROJECT:-sotipapier-production}}
+  LANGSMITH_ENDPOINT: ${LANGSMITH_ENDPOINT:-https://api.smith.langchain.com}
+  LANGCHAIN_TRACING_V2: "true"
+  LANGCHAIN_ENDPOINT: ${LANGSMITH_ENDPOINT:-https://api.smith.langchain.com}
+  LANGCHAIN_API_KEY: ${LANGCHAIN_API_KEY:-${LANGSMITH_API_KEY:-}}
+  LANGCHAIN_PROJECT: ${LANGSMITH_PROJECT:-${LANGCHAIN_PROJECT:-sotipapier-production}}
+
+networks:
+  sotipapier_net:
+    driver: bridge
+
+volumes:
+  hf_hub_xlm_cache:
+
+# =============================================================================
+# Microservice Tool — classification PDR (FastAPI, port 8000)
+# =============================================================================
+services:
+  agent-pdr-train:
+    profiles: ["train"]
+    build:
+      context: ./agent_pdr_microservice
+      dockerfile: Dockerfile
+    container_name: agent-pdr-train
+    restart: "no"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - HF_BASE_MODEL=camembert-base
+      - TRAIN_EPOCHS=3
+      - TRAIN_BATCH_SIZE=8
+      - TRAIN_MAX_LENGTH=160
+      - LEVEL1_DATA_PATH=/app/data/dataset_niveau1_mp_vs_pdr_clean.csv
+    volumes:
+      - ./agent_pdr_microservice/data:/app/data:ro
+      - ./local_models:/app/local_models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: ["python", "-m", "src.production_chain.train_transformers"]
+
+  agent-mp-chimie-train:
+    profiles: ["train_mp_chimie"]
+    build:
+      context: ./agent_pdr_microservice
+      dockerfile: Dockerfile
+    container_name: agent-mp-chimie-train
+    restart: "no"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - HF_BASE_MODEL=FacebookAI/xlm-roberta-large
+      - HF_TOKEN=${HF_TOKEN:-}
+      - HUGGING_FACE_HUB_TOKEN=${HUGGING_FACE_HUB_TOKEN:-}
+      - TRAIN_CLEAR_HF_TOKEN=${TRAIN_CLEAR_HF_TOKEN:-1}
+      - TRAIN_EPOCHS=3
+      - TRAIN_BATCH_SIZE=2
+      - TRAIN_MAX_LENGTH=256
+      - TRAIN_GRAD_ACCUM=4
+      - TRAIN_FP16=1
+    volumes:
+      - ./agent_pdr_microservice/data:/app/data:ro
+      - ./agent_pdr_microservice/models_saved:/app/models_saved
+      - ./agent_pdr_microservice/scripts:/app/scripts:ro
+      - hf_hub_xlm_cache:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: ["python", "/app/scripts/train_xlm_roberta.py"]
+
+  agent-classification:
+    build:
+      context: ./agent_pdr_microservice
+      dockerfile: Dockerfile.classification
+    container_name: agent-classification
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      <<: *langsmith_env
+    volumes:
+      - ./agent_pdr_microservice/models_saved/xlm_roberta_large_mp_chimie:/app/models_saved/xlm_roberta_large_mp_chimie:ro
+      - ./agent_pdr_microservice/src/agent:/app/src/agent:ro
+    networks:
+      - sotipapier_net
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  agent-pdr:
+    build:
+      context: ./agent_pdr_microservice
+      dockerfile: Dockerfile
+    container_name: agent-pdr
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      LEVEL1_MODEL_DIR: "/app/local_models/level1_mp_pdr"
+      <<: *langsmith_env
+    volumes:
+      - ./local_models:/app/local_models:ro
+    networks:
+      - sotipapier_net
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  agent_recette:
+    build:
+      context: ./agent_pdr_microservice
+    container_name: agent-recette
+    restart: unless-stopped
+    ports:
+      - "8002:8001"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: ["uvicorn", "agent_recette_microservice.agent_recette:app", "--host", "0.0.0.0", "--port", "8001"]
+    environment:
+      OLLAMA_BASE_URL: "http://host.docker.internal:11434"
+      <<: *langsmith_env
+    volumes:
+      - ./agent_pdr_microservice/data:/app/data_sources:ro
+      - ./agent_pdr_microservice/data:/app/data:ro
+    networks:
+      - sotipapier_net

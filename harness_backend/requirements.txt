@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pydantic>=2.0
+pydantic-settings
+langgraph
+langchain
+langchain-ollama
+scikit-learn
+transformers
+torch

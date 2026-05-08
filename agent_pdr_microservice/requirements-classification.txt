@@ -1,0 +1,11 @@
+# Runtime microservice classification MP/CHIMIE (XLM-RoBERTa-large)
+# torch : installé séparément dans Dockerfile.classification (wheels CUDA cu121)
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+transformers==4.48.2
+sentencepiece==0.2.0
+protobuf>=4.25.0,<6
+numpy==1.26.4
+# Traces LangSmith (hors LangChain) via @traceable sur l’inférence HF
+langsmith>=0.1.99,<0.2

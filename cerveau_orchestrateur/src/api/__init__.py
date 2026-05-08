@@ -1,0 +1,2 @@
+"""Couche API FastAPI."""
+

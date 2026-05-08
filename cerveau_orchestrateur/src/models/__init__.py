@@ -1,0 +1,2 @@
+"""Package modèles SQLAlchemy."""
+
