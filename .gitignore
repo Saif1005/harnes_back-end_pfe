@@ -11,3 +11,21 @@ frontend/.vite/
 .mypy_cache/
 *.sqlite
 *.pem
+
+# Données tabulaires / binaires — ne pas pousser sur GitHub (copier sur l’instance ou S3)
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.parquet
+
+# Données / exports dans ces dossiers (README et .md de doc restent versionnés)
+data_sources/**
+!data_sources/README.md
+agent_pdr_microservice/data/**
+!agent_pdr_microservice/data/README.md
+!agent_pdr_microservice/data/formule_recette.md
+
+# Rapports locaux Harness (garder uniquement les scripts .py sous test_reports/)
+harness_backend/test_reports/**/*.csv
+harness_backend/test_reports/**/*.json
